@@ -78,8 +78,8 @@ public class Socket: PhoenixTransportDelegate {
     return self.paramsClosure?()
   }
   
-  /// The optional params closure used to get params whhen connecting. Must
-  /// be set when initializaing the Socket.
+  /// The optional params closure used to get params when connecting. Must
+  /// be set when initializing the Socket.
   public let paramsClosure: PayloadClosure?
   
   /// The WebSocket transport. Default behavior is to provide a Starscream
@@ -92,7 +92,7 @@ public class Socket: PhoenixTransportDelegate {
   /// Override to provide custom encoding of data before writing to the socket
   public var encode: (Any) -> Data = Defaults.encode
   
-  /// Override to provide customd decoding of data read from the socket
+  /// Override to provide custom decoding of data read from the socket
   public var decode: (Data) -> Any? = Defaults.decode
   
   /// Timeout to use when opening connections
@@ -264,7 +264,7 @@ public class Socket: PhoenixTransportDelegate {
   /// Disconnects the socket
   ///
   /// - parameter code: Optional. Closing status code
-  /// - paramter callback: Optional. Called when disconnected
+  /// - parameter callback: Optional. Called when disconnected
   public func disconnect(code: CloseCode = CloseCode.normal,
                          callback: (() -> Void)? = nil) {
       // The socket was closed cleanly by the User
@@ -281,7 +281,7 @@ public class Socket: PhoenixTransportDelegate {
     self.connection?.disconnect(code: code.rawValue, reason: nil)
     self.connection = nil
     
-    // The socket connection has been torndown, heartbeats are not needed
+    // The socket connection has been torn down, heartbeats are not needed
     self.heartbeatTimer?.stop()
     
     // Since the connection's delegate was nil'd out, inform all state
@@ -559,7 +559,7 @@ public class Socket: PhoenixTransportDelegate {
   
   /// Logs the message. Override Socket.logger for specialized logging. noops by default
   ///
-  /// - paramter items: List of items to be logged. Behaves just like debugPrint()
+  /// - parameter items: List of items to be logged. Behaves just like debugPrint()
   func logItems(_ items: Any...) {
     let msg = items.map( { return String(describing: $0) } ).joined(separator: ", ")
     self.logger?("SwiftPhoenixClient: \(msg)")
@@ -723,7 +723,7 @@ public class Socket: PhoenixTransportDelegate {
     })
   }
   
-  /// Sends a hearbeat payload to the phoenix serverss
+  /// Sends a heartbeat payload to the phoenix servers.
   @objc func sendHeartbeat() {
     // Do not send if the connection is closed
     guard isConnected else { return }

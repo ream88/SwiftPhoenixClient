@@ -609,7 +609,7 @@ public class Socket: PhoenixTransportDelegate {
     // Send an error to all channels
     self.triggerChannelError()
     
-    // Inform any state callabcks of the error
+    // Inform any state callbacks of the error
     self.stateChangeCallbacks.error.forEach({ $0.callback.call(error) })
   }
   
